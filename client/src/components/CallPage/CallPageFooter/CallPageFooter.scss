@@ -1,0 +1,105 @@
+.CallPageFooter{
+    position: absolute;
+    bottom: 0;
+    // left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    background: #fff;
+    z-index: 1;
+    .left__item{
+        display: flex;
+        align-items: center;
+        height: 100%;
+        max-width: 130px;
+        .icon__block{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            height: 100%;
+            .icon{
+                margin-left: 10px;
+                font-size: 20px;
+            }
+            &:hover{
+                cursor: pointer;
+                background: #eee;
+            }
+        }
+    }
+    .center__item{
+        width:100% ;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        .icon__block{
+            background: rgb(224, 219, 219);
+            border: 1px solid rgb(233, 233, 233);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            .icon{
+                color: #555;
+                font-size: 25px;
+                &.red{
+                    color:#d93825  !important ;
+                }
+            }
+            &:hover{
+                cursor: pointer;
+                box-shadow:  0 0 10px rgb(204, 196, 196);
+            }
+            &.red__bg{
+                background: #d93825;
+                .icon{
+                    color: #fff;
+                }
+            }
+        }
+    }
+  
+    .right__item{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        // width: 350px;
+        // width: 30%;
+        .icon__block{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100%;
+            width: 146px;
+            color: #555;
+            .icon{
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+            .title{
+                margin: 0;
+                font-size: 14px;
+                font-weight: 700;
+            }
+            &:hover{
+                cursor: pointer;
+                background: #eee ;
+            }
+        }
+    }
+}
+
+@media(max-width:502px){
+    .CallPageFooter{
+        flex-wrap: wrap;
+    }
+}
