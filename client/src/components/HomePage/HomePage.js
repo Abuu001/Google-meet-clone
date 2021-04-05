@@ -4,8 +4,20 @@ import "./HomePage.scss"
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import KeyboardIcon from '@material-ui/icons/Keyboard';
 import meetGroup from "../Assets/googleGroup1.jpeg"
+import shortid from "shortid"
+import { useHistory } from 'react-router-dom';
 
 function HomePage() {
+
+    const history= useHistory()
+
+    const startCall=()=>{ 
+        //generate a unique id
+            const uid= shortid.generate()
+        //redirect to the call page
+         history.push(`${uid}#init`);
+    }
+
     return (
         <div className="HomePage">
            <Header />
@@ -17,7 +29,7 @@ function HomePage() {
                                 meetings , Google Meet, to make it free and available for all.
                             </p>
                             <div className="action__btn">
-                                <button className="btn green">
+                                <button className="btn green" onClick={startCall}>
                                     <VideoCallIcon className="icon__block"/>
                                     New Meeting
                                 </button>
