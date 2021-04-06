@@ -1,19 +1,14 @@
 require('dotenv').config({path : "../.env"})
 // let redis = require("redis").createClient();
-let client;
-const REDIS_PORT = process.env.REDIS_PORT || 6379;
+const redis = require("redis");
+const REDIS_PORT = process.env.REDIS_URL || 6379;
+const client = redis.createClient(REDIS_PORT, {
+    tls: {
+        rejectUnauthorized: false
+    }
+});
 
-if (process.env.REDISTOGO_URL) {
-    let search = process.env.REDISTOGO_URL
-    var rtg   =JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
-    console.log(search)
-    // var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-    client = require("redis").createClient(rtg.port, rtg.hostname);
-
-    redis.auth(rtg.auth.split(":")[1]);
-  } else {
-    client = require("redis").createClient(REDIS_PORT);
-  }
+ 
 
 // client.on("connect", () => {
 //     console.log("Connected to Redis.... ");
