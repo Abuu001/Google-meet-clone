@@ -7,8 +7,10 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import ClosedCaptionIcon from '@material-ui/icons/ClosedCaption';
 import DesktopMacIcon from '@material-ui/icons/DesktopMac';
 import MicOffIcon from '@material-ui/icons/MicOff';
+import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 
-function CallPageFooter({isPresenting,stopScreenShare,isAudio,disconnectCall,screenShare,toggleAudio}) {
+function CallPageFooter({isPresenting,showVideo,stopScreenShare,isAudio,disconnectCall,screenShare,toggleAudio,disableVideo}) {
+    
     return (
         <div className="CallPageFooter">
             <div className="left__item">
@@ -24,8 +26,8 @@ function CallPageFooter({isPresenting,stopScreenShare,isAudio,disconnectCall,scr
                     <CallIcon className="icon red"/>
                 </div>
 
-                <div className="icon__block" >
-                    <VideocamIcon className="icon  "/>
+                <div className={`icon__block ${!showVideo ?  "red__bg" : null}`}  onClick={disableVideo}>
+                  {showVideo  ?    <VideocamIcon className="icon  " /> : <VideocamOffIcon   className="icon "/> } 
                 </div>
             </div>
 
