@@ -13,7 +13,7 @@ const client = redis.createClient(REDIS_PORT, {
 client.on("connect", () => {
     console.log("Connected to Redis.... ");
 });
-   
+    
 module.exports= client;
 
 
