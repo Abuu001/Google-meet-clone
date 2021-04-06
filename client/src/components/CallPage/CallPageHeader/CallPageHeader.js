@@ -40,7 +40,7 @@ function CallPageHeader( {isMessenger , setIsMessenger,setMessageAlert,messageAl
 
             <div className="header__items icon__block">
                 <AccountCircleIcon    className="icon profile" />
-            </div>
+            </div> 
         </div>
     )
 }
