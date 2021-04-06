@@ -4,8 +4,10 @@ let client;
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 
 if (process.env.REDISTOGO_URL) {
-    
-    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+    let search = process.env.REDISTOGO_URL
+    var rtg   =JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+    console.log(search)
+    // var rtg   = require("url").parse(process.env.REDISTOGO_URL);
     client = require("redis").createClient(rtg.port, rtg.hostname);
 
     redis.auth(rtg.auth.split(":")[1]);
