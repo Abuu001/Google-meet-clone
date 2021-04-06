@@ -7,8 +7,15 @@ const PORT =  process.env.PORT || 8000;
 const server = http.createServer(app)
 const routes = require('./Routes/routes')
 
-const io =require('socket.io')(server)
+// const io =require('socket.io')(server)
 const socketManager= require('./controllers/socketManager')
+ 
+const io = require("socket.io")(server, {
+    cors: {
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"]
+    }
+  });
 
 app.use([
     cors(),

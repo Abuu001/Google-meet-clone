@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Messenger.scss"
 import ClearIcon from '@material-ui/icons/Clear';
 import SendIcon from '@material-ui/icons/Send';
 import PeopleIcon from '@material-ui/icons/People';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import {formatDate} from "../../utils/helpers"
 
-function Messenger() {
+function Messenger({setIsMessenger,messageList,sendMsg}) {
+
+    const[message,setMessage]=useState('');
+
+    const handleChange=(e)=>{
+         setMessage(e.target.value)
+    }
+
+    const handleKeyDown=(e)=>{
+        if(e.key === 'Enter' ){
+            sendMsg(message)
+            setMessage('')
+        }
+    }
+
+    const handleSendMsg=()=>{
+        sendMsg(message)
+        setMessage('')
+    }
+
     return (
         <div className="messenger">
             <div className="messenger__header">
                 <h1>Meeting Details</h1>
-                <ClearIcon className="icon" />
+                <ClearIcon className="icon" onClick={()=>setIsMessenger(false)} />
             </div>
 
             <div className="messenger__header__tabs">
@@ -26,18 +46,22 @@ function Messenger() {
             </div>
 
             <div className="chat__section">
-                <div className="chat__block">
-                    <div className="sender">
-                        you <small>10 PM</small>
-                    </div>
 
-                    <p className="msg">Actual message</p>
-                </div>
+                {messageList.map((item)=>(
+                    <div key={item.time} className="chat__block">
+                        <div className="sender">
+                            {item.user} <small>{formatDate(item.time)}</small>
+                        </div>
+    
+                        <p className="msg">{item.msg}</p>
+                    </div>
+                ))}
+    
             </div>
 
             <div className="send__msg__section">
-                <input placeholder="Send a message to everyone"/>
-                <SendIcon   className="icon"/>
+                <input placeholder="Send a message to everyone" value={message} onChange={(e)=>handleChange(e) } onKeyDown={e=>handleKeyDown(e)}/>
+                <SendIcon   className="icon" onClick={handleSendMsg}/>
             </div>
         </div>
     )

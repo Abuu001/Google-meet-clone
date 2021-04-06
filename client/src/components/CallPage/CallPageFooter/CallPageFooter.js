@@ -6,8 +6,9 @@ import CallIcon from '@material-ui/icons/Call';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import ClosedCaptionIcon from '@material-ui/icons/ClosedCaption';
 import DesktopMacIcon from '@material-ui/icons/DesktopMac';
+import MicOffIcon from '@material-ui/icons/MicOff';
 
-function CallPageFooter() {
+function CallPageFooter({isPresenting,stopScreenShare,isAudio,disconnectCall,screenShare,toggleAudio}) {
     return (
         <div className="CallPageFooter">
             <div className="left__item">
@@ -15,15 +16,15 @@ function CallPageFooter() {
             </div>
 
             <div className="center__item">
-                <div className="icon__block">
-                    <MicIcon className="icon"/>
+                <div className={`icon__block ${!isAudio ?  "red__bg" : null}`} onClick={()=>toggleAudio(!isAudio)}>
+                    {isAudio ? <MicIcon className="icon"/> :  < MicOffIcon  className="icon"/> } 
                 </div>
 
-                <div className="icon__block">
+                <div className="icon__block" onClick={disconnectCall}>
                     <CallIcon className="icon red"/>
                 </div>
 
-                <div className="icon__block">
+                <div className="icon__block" >
                     <VideocamIcon className="icon  "/>
                 </div>
             </div>
@@ -34,10 +35,17 @@ function CallPageFooter() {
                     <p className="title">Turn on captions</p>
                 </div>
 
-                <div className="icon__block">
-                    <DesktopMacIcon className="icon red" />
-                    <p className="title">Present now</p>
-                </div>
+                    {isPresenting ?(
+                        <div className="icon__block"  onClick={stopScreenShare  }>
+                        <DesktopMacIcon className="icon red" />
+                        <p className="title">Stop presenting</p>
+                       </div>
+                    ):(
+                        <div className="icon__block"    onClick={screenShare}>
+                        <DesktopMacIcon className="icon red"/>
+                        <p className="title">Present now</p>
+                    </div>
+                    )}
             </div>
         </div>
     )

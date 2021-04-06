@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../UI/Header/Header'
 import "./HomePage.scss"
 import VideoCallIcon from '@material-ui/icons/VideoCall';
@@ -9,7 +9,8 @@ import { useHistory } from 'react-router-dom';
 
 function HomePage() {
 
-    const history= useHistory()
+    const history= useHistory();
+    const [joinMeeting,setJoinMeeting]=useState('')
 
     const startCall=()=>{ 
         //generate a unique id
@@ -17,6 +18,11 @@ function HomePage() {
         //redirect to the call page
          history.push(`${uid}#init`);
     }
+
+    const EnterMeeting=()=>{
+        window.location=joinMeeting
+     
+    };
 
     return (
         <div className="HomePage">
@@ -36,9 +42,9 @@ function HomePage() {
                                 <div className="input__block">
                                     <div className="input__section">
                                         <KeyboardIcon className="icon__block" />
-                                        <input placeholder="Enter a code or link"/>
+                                        <input placeholder="Enter a code or link" value={joinMeeting} onChange={e=>setJoinMeeting(e.target.value)} />
                                     </div>
-                                    <button className="btn no-bg">Join</button>
+                                    <button className="btn no-bg" onClick={EnterMeeting}>Join</button>
                                 </div>
                             </div>
                         </div>
