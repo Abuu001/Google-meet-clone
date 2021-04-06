@@ -51,6 +51,8 @@
             padding: 15px;
             border-radius: 5px;
             .meeting__link__text{
+                display: flex;
+                flex-wrap: wrap;
                 font-style: italic;
                 font-size: 14px;
                 font-weight: 600;
@@ -85,6 +87,5 @@
     .MeetingInfo{
         left: 9px;
         top: 79px;
-       
     }
 }
