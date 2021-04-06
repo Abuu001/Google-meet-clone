@@ -8,7 +8,7 @@ import { useHistory, useParams } from "react-router-dom";
 import MessageListReducer from "../../components/Reducer/MessageListReducer";
 import Peer from "simple-peer";
 import { postRequest, getRequest } from "../utils/apiRequests";
-import { BASE_URL, GET_CALL_ID, SAVE_CALL_ID } from "../utils/apiEndPoints";
+import { GET_CALL_ID, SAVE_CALL_ID } from "../utils/apiEndPoints";
 import Alert from "../UI/Alert/Alert";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3008");
@@ -26,6 +26,7 @@ function CallPage() {
   const [streamObj, setStreamObj] = useState();
   const [messageAlert, setMessageAlert] = useState({});
   const [meetingInfoPopup, setMeetingInfoPopup] = useState(false);
+  const [showVideo,setShowVideo]=useState(true)
   let alertTimeout = null;
   const [messageList, messageListReducer] = useReducer(
     MessageListReducer,
@@ -46,11 +47,11 @@ function CallPage() {
     socket.on("code", (data) => {
       peer.signal(data);
     });
-  }, []);
+  }, [showVideo]);
 
   const getReceiverCode = async () => {
-    const res = await getRequest(`${BASE_URL}${GET_CALL_ID}/${id}`);
-
+    // const res = await getRequest(`${BASE_URL}${GET_CALL_ID}/${id}`);
+    const res = await getRequest(`${GET_CALL_ID}/${id}`);
     if (res.code) {
       peer.signal(res.code);
     }
@@ -60,7 +61,7 @@ function CallPage() {
     let video = document.querySelector("#videoElement");
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
+        .getUserMedia({ video: showVideo, audio: true })
         .then(function (stream) {
           video.srcObject = stream;
 
@@ -82,7 +83,7 @@ function CallPage() {
                 id,
                 signalData: data,
               };
-              await postRequest(`${BASE_URL}${SAVE_CALL_ID}`, payload);
+              await postRequest(`${SAVE_CALL_ID}`, payload);
             } else {
               socket.emit("code", data, (cbData) => {
                 console.log("code sent");
@@ -187,32 +188,6 @@ function CallPage() {
   };
 
 
-
-  // async function screenShare() {
-  //   try {
-  //     let video = document.querySelector("#videoElement");
-  //     video.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
-  //     .then((screenStream) => {
-  //             peer.replaceTrack(
-  //               streamObj.getVideoTracks()[0],
-  //               screenStream.getVideoTracks(),
-  //               streamObj
-  //             );
-  //             setScreenCastStream(screenStream);
-  //             screenStream.getTracks()[0].onended = () => {
-  //               peer.replaceTrack(
-  //                 screenStream.getVideoTracks()[0],
-  //                 streamObj.getVideoTracks()[0],
-  //                 streamObj
-  //               );
-  //             };
-  //             setIsPresenting(true);
-  //           });
-  //   } catch(err) {
-  //     console.error("Error: " + err);
-  //   }
-  // }
-
   const stopScreenShare = () => {
     screenCastStream.getVideoTracks().forEach((track) => {
       track.stop();
@@ -230,6 +205,11 @@ function CallPage() {
     streamObj.getAudioTracks()[0].enabled = value;
     setIsAudio(value);
   };
+
+  const disableVideo=async()=>{
+    setShowVideo(prev=>!showVideo);
+   console.log("disabled video call")
+  }
 
   const disconnectCall = () => {
     peer.destroy();
@@ -254,6 +234,8 @@ function CallPage() {
         setMessageAlert={setMessageAlert}
       />
       <CallPageFooter
+       disableVideo={disableVideo}
+       showVideo={showVideo}
         isPresenting={isPresenting}
         stopScreenShare={stopScreenShare}
         screenShare={screenShare}
