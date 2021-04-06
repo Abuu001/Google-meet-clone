@@ -1,18 +1,18 @@
 require('dotenv').config({path : "../.env"})
-// let redis = require("redis").createClient();
+ 
 const redis = require("redis");
 const REDIS_PORT = process.env.REDIS_URL || 6379;
+
 const client = redis.createClient(REDIS_PORT, {
     tls: {
         rejectUnauthorized: false
     }
 });
 
- 
 
-// client.on("connect", () => {
-//     console.log("Connected to Redis.... ");
-// });
+client.on("connect", () => {
+    console.log("Connected to Redis.... ");
+});
    
 module.exports= client;
 
