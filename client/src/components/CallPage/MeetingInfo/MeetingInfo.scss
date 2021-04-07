@@ -52,8 +52,11 @@
             border-radius: 5px;
             display: flex;
             flex-wrap: wrap;
-            background: red;
+            flex-direction: row;
             .meeting__link__text{
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
                 font-style: italic;
                 font-size: 14px;
                 font-weight: 600;
