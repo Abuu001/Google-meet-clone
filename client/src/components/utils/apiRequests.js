@@ -24,8 +24,7 @@ export const getRequest= async (url,payload={})=>{
     const data = await axios.get(url,payload)
             .then(resp=>resp.data)
             .catch(err=>(
-                console.log(err)
-                // {error :err.response.data}
+                {error :err.response.data}
             ))
 
     return data;

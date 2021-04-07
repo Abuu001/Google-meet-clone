@@ -48,10 +48,11 @@ function CallPage() {
       peer.signal(data);
     });
   }, [showVideo]);
-
+ 
   const getReceiverCode = async () => {
     // const res = await getRequest(`${BASE_URL}${GET_CALL_ID}/${id}`);
     const res = await getRequest(`${GET_CALL_ID}/${id}`);
+    console.log(res)
     if (res.code) {
       peer.signal(res.code);
     }
@@ -93,8 +94,9 @@ function CallPage() {
 
           peer.on("connect", () => {
             // wait for 'connect' event before using the data channel
+            console.log("Conected")
           });
-
+ 
           peer.on("data", (data) => {
             clearTimeout(alertTimeout);
             messageListReducer({
@@ -142,12 +144,11 @@ function CallPage() {
   };
 
   const sendMsg = (msg) => {
-     
+ 
+    peer.send(msg);  
     // peer.on('connect', (msg) => {
-    //   console.log(msg)
     //   console.log('I am connected now')
     // }) 
-    peer.send(msg);  
 
     messageListReducer({
       type: "addMessage",
