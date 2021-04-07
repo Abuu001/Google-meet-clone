@@ -53,10 +53,8 @@
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
+            cursor: pointer;
             .meeting__link__text{
-                display: flex;
-                flex-wrap: wrap;
-                flex-direction: row;
                 font-style: italic;
                 font-size: 14px;
                 font-weight: 600;

@@ -25,8 +25,8 @@ function MeetingInfo({setMeetingInfoPopup,url}) {
             with others you want in the meeting
             </p>
             <div className="meeting__link" onClick={copyToClipBoard}>
-                <div className="meeting__link__text"><i>{url}</i></div>
-                <FileCopyIcon  />
+                <span className="meeting__link__text">{url}</span>
+                <FileCopyIcon  /> 
             </div>
             <div className="permission__text">
                 <SecurityIcon className="icon"/>

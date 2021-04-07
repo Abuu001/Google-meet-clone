@@ -142,11 +142,12 @@ function CallPage() {
   };
 
   const sendMsg = (msg) => {
-    
-    peer.send(msg);  
+     
     // peer.on('connect', (msg) => {
+    //   console.log(msg)
     //   console.log('I am connected now')
     // }) 
+    peer.send(msg);  
 
     messageListReducer({
       type: "addMessage",
