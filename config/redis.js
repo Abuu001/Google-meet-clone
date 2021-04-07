@@ -7,9 +7,9 @@ const client = redis.createClient(REDIS_PORT, {
     tls: {
         rejectUnauthorized: false
     }
-});
+}); 
 
-
+ 
 client.on("connect", () => {
     console.log("Connected to Redis.... ");
 });

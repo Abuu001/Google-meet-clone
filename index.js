@@ -13,7 +13,7 @@ const socketManager= require('./controllers/socketManager')
  
 const io = require("socket.io")(server, {
     cors: {
-      origin: "http://localhost:3000",
+      origin: ["http://localhost:3000","https://googlemeetclone123.herokuapp.com"],
       methods: ["GET", "POST"]
     }
   });

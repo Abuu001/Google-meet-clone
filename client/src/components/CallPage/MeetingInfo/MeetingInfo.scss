@@ -50,9 +50,10 @@
             background:#f1f3f5 ;
             padding: 15px;
             border-radius: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            background: red;
             .meeting__link__text{
-                display: flex;
-                flex-wrap: wrap;
                 font-style: italic;
                 font-size: 14px;
                 font-weight: 600;
@@ -65,7 +66,7 @@
             .icon{
                 cursor: pointer;
                 color: #555;
-        }
+            }
     }
     .permission__text{
         display: flex;
