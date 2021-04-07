@@ -54,7 +54,9 @@
             flex-wrap: wrap;
             flex-direction: row;
             cursor: pointer;
+            overflow: hidden;
             .meeting__link__text{
+                overflow: hidden;
                 font-style: italic;
                 font-size: 14px;
                 font-weight: 600;
